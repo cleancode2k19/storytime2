@@ -14,17 +14,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val context = this;
         btnSignup.run {
-            ;
             btnSignup.setOnClickListener({
                 if(readerEmail.text.toString().length>0 && readerPassword.text.toString().length>0){
                     if(readerPassword.text.toString()==readerRepeatPassword.text.toString() && accept.isChecked) {
                         var reader = Reader(
-                            "Bingo",
+                            readerName.text.toString(),
                             readerEmail.text.toString(),
                             readerPassword.text.toString()
                         )
                         var db = DBHandler(context)
                         db.insertData(reader)
+                        val myIntent = Intent(baseContext, LoginActivity::class.java)
+                        startActivity(myIntent)
                     } else{
                         Toast.makeText(context,"Please fill corect password or accept the license aggrement",Toast.LENGTH_SHORT).show()
                     }
