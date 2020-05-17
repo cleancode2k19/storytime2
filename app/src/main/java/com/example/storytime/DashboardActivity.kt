@@ -1,32 +1,53 @@
 package com.example.storytime
 
-import android.R
-import android.content.Intent
-import android.os.Bundle
-import android.text.method.LinkMovementMethod
-import android.view.View
-import android.widget.TextView
+
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.os.Bundle
+import android.widget.ListView
+import android.widget.Toast
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.dashboard_story.*
 
 
-class DashboardActivity : AppCompatActivity() {
-
+class DashboardActivity() : AppCompatActivity() {
+    lateinit var storyList: MutableList<StoryBacklog>
+    lateinit var listView: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_story)
-        val context = this;
+        storyList = mutableListOf()
+        listView = findViewById(R.id.storyList)
+        getData()
+    }
 
-        val t2 = findViewById<View>(R.id.insertstorydata) as TextView
-        t2.movementMethod = LinkMovementMethod.getInstance()
+    private fun getData(){
+        val database = FirebaseDatabase.getInstance()
 
-        insertstorydata.run {
-            insertstorydata.setOnClickListener({
+        val myRef: DatabaseReference = database.getReference("story_backlog")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
-                val myIntent = Intent(baseContext, LoginActivity::class.java)
-                startActivity(myIntent)
+            override fun onDataChange(p0: DataSnapshot) {
+                if(p0!!.exists()){ //P0!! to address null value
+                    for(item in p0.children){
+                        val story = item.getValue(StoryBacklog::class.java) //.getvalue method only takes java class
+                        storyList.add(story!!)
+                    }
+                    Toast.makeText(
+                        applicationContext,
+                        "You are in dashboard",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val adapter = DashboardAdapter(applicationContext,R.layout.stories,storyList)
+                    listView.adapter = adapter
+                }
+            }
 
-            })
-        }
+        })
+
+
     }
 }

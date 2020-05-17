@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
@@ -11,17 +12,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/storytimelogo" />
             <TextView
-                android:id="@+id/insertstorydata"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="InsertStory"/>
+                android:layout_weight="1"
+                android:text="You are in dashboard" />
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ListView
+                android:id="@+id/storyList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#11CDCCCC"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+
+
 </LinearLayout>

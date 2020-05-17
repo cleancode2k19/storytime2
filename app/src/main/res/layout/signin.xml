@@ -17,7 +17,7 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/storytimelogo" />
             <EditText
-                android:id="@+id/readerEmail"
+                android:id="@+id/loginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_background"
@@ -29,7 +29,7 @@
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/manicon" />
             <EditText
-                android:id="@+id/readerPassword"
+                android:id="@+id/loginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_background"
