@@ -1,5 +1,6 @@
 package com.example.storytime
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ class DashboardAdapter (val mCtx : Context, val layoutResId:Int,val storyList:Li
         val textViewTitle = view.findViewById<TextView>(R.id.story_title)
         val storyListData = storyList[position]
         textViewTitle.text=storyListData.story_title
+        Log.d("Bingo", storyListData.story_title)
+
         return view
     }
 }
