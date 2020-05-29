@@ -20,6 +20,7 @@ class DashboardActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_story)
+
         storyList = mutableListOf()
         listView = findViewById(R.id.storyListUI)
         myRef = FirebaseDatabase.getInstance().getReference("story_backlog")
