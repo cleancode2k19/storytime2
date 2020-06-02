@@ -54,6 +54,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 android:hint="password"
+                android:inputType="textPassword"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/pen" />
             <EditText
@@ -66,6 +67,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 android:hint="Re Enter Password"
+                android:inputType="textPassword"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/pen" />
             <CheckBox
@@ -83,6 +85,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"
                 android:text="Sign UP"
+                android:textAllCaps="false"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textSize="50sp"/>
+            <Button
+                android:id="@+id/btnSignin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Sign In"
                 android:textAllCaps="false"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "413068688065-g1fg5phsiac0r5kqocvuk2en5v56jubc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.storytime",
+            "certificate_hash": "7a1ae1a924cf530de8fc6ae9ec8fb1e535037d09"
+          }
+        },
+        {
           "client_id": "413068688065-gnsu9260dka99km1a3aifs7getl6b1rj.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var readerPassword: EditText
     lateinit var readerRepeatPassword: EditText
     lateinit var btnSignup: Button
+    lateinit var btnSignin: Button
     lateinit var accept: CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         btnSignup = findViewById(R.id.btnSignup)
         btnSignup.setOnClickListener{
             saveData()
+        }
+        btnSignin = findViewById(R.id.btnSignin)
+        btnSignin.setOnClickListener{
+            val myIntent = Intent(baseContext, LoginActivity::class.java)
+            startActivity(myIntent)
         }
     }
     private fun saveData(){

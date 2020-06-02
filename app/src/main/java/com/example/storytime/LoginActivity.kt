@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,19 +17,25 @@ class LoginActivity : AppCompatActivity() {
     lateinit var readerEmail: EditText
     lateinit var readerPassword: EditText
     lateinit var btnLogin: Button
+    lateinit var fgpwd:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signin)
+        fgpwd = findViewById(R.id.fgpwd)
+        fgpwd.setOnClickListener{
+            val myIntent = Intent(baseContext, ForgotPasswordActivity::class.java)
+            startActivity(myIntent)
+        }
         readerEmail = findViewById(R.id.loginEmail)
         readerPassword = findViewById(R.id.loginPassword)
         btnLogin = findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener{
             getLoginData()
         }
+
     }
     private fun getLoginData() {
-
         val readerEmail = readerEmail.text.toString().trim()
           if(readerEmail.isEmpty()){
               Toast.makeText(applicationContext,"Enter correct username/Email", Toast.LENGTH_LONG).show()
@@ -40,18 +47,21 @@ class LoginActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("reader")
         myRef.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
             override fun onDataChange(p0: DataSnapshot) {
+
                 if(p0!!.exists()){
-                    var flag = false//P0!! to address null value
+                    //P0!! to address null value
+                    var flag = false
                     for(item in p0.children) {
                         val emailOk = item.child("email").getValue().toString().equals(readerEmail)
                         val pwdOk = item.child("password").getValue().toString().equals(readerPassword)
                         if (emailOk && pwdOk) {
-                            flag = true;
+                            flag = true
+                            Toast.makeText(
+                                applicationContext,
+                                "Login Success",
+                                Toast.LENGTH_LONG
+                            ).show()
                             val myIntent = Intent(baseContext, DashboardActivity::class.java)
                             startActivity(myIntent)
                             return
@@ -68,6 +78,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
 
         })
 
