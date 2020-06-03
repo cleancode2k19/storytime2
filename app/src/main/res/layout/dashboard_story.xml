@@ -6,6 +6,16 @@
     android:orientation="vertical"
     >
     <TextView
+        android:id="@+id/rName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        />
+    <TextView
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

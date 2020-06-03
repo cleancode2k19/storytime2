@@ -1,15 +1,14 @@
 package com.example.storytime
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
 import com.google.firebase.database.*
 
 
@@ -37,13 +36,17 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun getLoginData() {
         val readerEmail = readerEmail.text.toString().trim()
+        var lflag = false
           if(readerEmail.isEmpty()){
               Toast.makeText(applicationContext,"Enter correct username/Email", Toast.LENGTH_LONG).show()
+              lflag=true
           }
         val readerPassword = readerPassword.text.toString().trim()
         if (readerPassword.isEmpty()) {
             Toast.makeText(applicationContext,"Enter correct password",Toast.LENGTH_LONG).show()
+            lflag=true
         }
+        if(!lflag){
         val database = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("reader")
         myRef.addValueEventListener(object : ValueEventListener {
@@ -62,6 +65,9 @@ class LoginActivity : AppCompatActivity() {
                                 "Login Success",
                                 Toast.LENGTH_LONG
                             ).show()
+                            val prefs =
+                                getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+                            prefs.edit().putString("username", item.child("name").getValue().toString()).commit()
                             val myIntent = Intent(baseContext, DashboardActivity::class.java)
                             startActivity(myIntent)
                             return
@@ -86,6 +92,13 @@ class LoginActivity : AppCompatActivity() {
         })
 
 
+    } else {
+            Toast.makeText(
+                applicationContext,
+                "Enter correct credentials",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
 }

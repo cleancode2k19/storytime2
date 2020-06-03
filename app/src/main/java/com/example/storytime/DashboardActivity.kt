@@ -1,20 +1,19 @@
 package com.example.storytime
+
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Handler
-import android.widget.ImageButton
-import android.widget.SeekBar
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.View
-import android.widget.ListView
+import android.widget.*
+import android.widget.AdapterView.OnItemClickListener
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.dashboard_story.*
-
 import java.util.concurrent.TimeUnit
+
 
 class DashboardActivity() : AppCompatActivity() {
     lateinit var storyList: MutableList<StoryBacklog>
@@ -36,9 +35,18 @@ class DashboardActivity() : AppCompatActivity() {
     private var forwardTime: Int = 5000
     private var backwardTime: Int = 5000
     lateinit var logOut: TextView
+    private lateinit var rName: TextView
+    var rowName="story1"
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_story)
+        val prefs =
+            getSharedPreferences("MyApp", Context.MODE_PRIVATE)
+        var username = prefs.getString("username", "UNKNOWN")
+        rName = findViewById(R.id.rName)
+        rName.text = username
         logOut = findViewById(R.id.logout)
         logOut.setOnClickListener {
             Toast.makeText(
@@ -72,6 +80,15 @@ class DashboardActivity() : AppCompatActivity() {
             }
 
         })
+
+        listView.setOnItemClickListener(OnItemClickListener { arg0, arg1, position, arg3 ->
+            rowName = "story"+(position+1).toString()
+            playStory()
+        })
+        playStory()
+
+    }
+    private fun playStory(){
         backwardBtn = findViewById(R.id.btnBackward)
         forwardBtn = findViewById(R.id.btnForward)
         playBtn = findViewById(R.id.btnPlay)
@@ -79,8 +96,8 @@ class DashboardActivity() : AppCompatActivity() {
         songName = findViewById(R.id.txtSongName)
         startTime = findViewById(R.id.txtStartTime)
         songTime = findViewById(R.id.txtSongTime)
-        songName.text = "SpeakerBox - song2"
-        mediaPlayer = MediaPlayer.create(this, R.raw.song2)
+        songName.text = "SpeakerBox -$rowName"
+        mediaPlayer = MediaPlayer.create(this, R.raw.story1)
         seekBar = findViewById(R.id.seekBar)
         seekBar.isClickable = false
         pauseBtn.isEnabled = true
@@ -150,7 +167,6 @@ class DashboardActivity() : AppCompatActivity() {
                 playBtn.isEnabled = true
             }
         }
-
     }
     private val updateSongTime = object : Runnable {
         override fun run() {

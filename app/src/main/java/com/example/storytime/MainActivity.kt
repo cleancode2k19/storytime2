@@ -36,43 +36,50 @@ class MainActivity : AppCompatActivity() {
     }
     private fun saveData(){
         val name = readerName.text.toString().trim()
+        var pflag=false
         if(name.isEmpty()){
-            readerName.error = "Please Enter your Name"
-            return
+            Toast.makeText(applicationContext,"Enter correct Name", Toast.LENGTH_LONG).show()
+            pflag=true
         }
         val readerEmail = readerEmail.text.toString().trim()
-      /*  if(readerEmail.isEmpty()){
-            readerEmail.error = "Please Enter your Email"
-            return
-        }*/
+        if(readerEmail.isEmpty()){
+            Toast.makeText(applicationContext,"Enter correct Email", Toast.LENGTH_LONG).show()
+            pflag=true
+        }
         val readerPassword = readerPassword.text.toString().trim()
-      /*  if(readerPassword.isEmpty()){
-            readerPassword.error = "Please Enter your Password"
-            return
+       if(readerPassword.isEmpty()){
+           Toast.makeText(applicationContext,"Enter correct password",Toast.LENGTH_LONG).show()
+           pflag=true
         }
         val readerRepeatPassword = readerRepeatPassword.text.toString().trim()
         if(readerRepeatPassword.isEmpty()){
-            readerRepeatPassword.error = "Please Enter your RepeatPassword"
-            return
+            Toast.makeText(applicationContext,"Enter repeat password",Toast.LENGTH_LONG).show()
+            pflag=true
         }
         if(readerPassword!=readerRepeatPassword){
-            readerRepeatPassword.error = "Please Enter your Repeat Password same as password"
-            return
+
+            Toast.makeText(applicationContext,"Please Enter your Repeat Password same as password", Toast.LENGTH_LONG).show()
+            pflag=true
         }
         if(accept.isChecked){
             accept.error = "Please Accept the terms and conditions"
-            return
-        } */
-        val database = FirebaseDatabase.getInstance()
+            pflag=true
+        }
+        if(!pflag) {
+            val database = FirebaseDatabase.getInstance()
 
-        val myRef: DatabaseReference = database.getReference("reader")
+            val myRef: DatabaseReference = database.getReference("reader")
 
-        val refid = myRef.push().key
-        val reader = Reader(refid, name,readerEmail,readerPassword )
-        myRef.child(refid.toString()).setValue(reader).addOnCompleteListener {
-            Toast.makeText(applicationContext,"Registration successful",Toast.LENGTH_LONG).show()
-            val myIntent = Intent(baseContext, LoginActivity::class.java)
-            startActivity(myIntent)
+            val refid = myRef.push().key
+            val reader = Reader(refid, name, readerEmail, readerPassword)
+            myRef.child(refid.toString()).setValue(reader).addOnCompleteListener {
+                Toast.makeText(applicationContext, "Registration successful", Toast.LENGTH_LONG)
+                    .show()
+                val myIntent = Intent(baseContext, LoginActivity::class.java)
+                startActivity(myIntent)
+            }
+        } else{
+            Toast.makeText(applicationContext,"Fix validation error", Toast.LENGTH_LONG).show()
         }
     }
 }
