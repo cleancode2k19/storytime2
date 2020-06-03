@@ -54,14 +54,15 @@
                 />
             <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
                 android:text="LOGIN"
-                android:textAllCaps="false"
+                android:layout_width="284dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:textSize="50sp"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/button_background"
+                android:textAllCaps="false"
+                android:textSize="40sp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

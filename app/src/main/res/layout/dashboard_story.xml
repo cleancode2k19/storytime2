@@ -7,13 +7,14 @@
     >
     <TextView
         android:id="@+id/logout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Out"
-        android:textColor="@android:color/background_dark"
-        android:textSize="16sp"
-        android:visibility="visible" />
-
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +24,7 @@
 
             <ImageView
                 android:layout_width="150dp"
-                android:layout_height="177dp"
+                android:layout_height="138dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/storytimelogo" />
 
@@ -56,51 +57,54 @@
                     android:textSize="16sp"
                     android:textStyle="bold|italic" />
 
+
                 <ImageButton
                     android:id="@+id/btnBackward"
-                    android:layout_width="46dp"
-                    android:layout_height="78dp"
-                    android:layout_marginTop="119dp"
-                    android:scaleType="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textView"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="-140dp"
                     android:src="@drawable/back" />
 
                 <ImageButton
                     android:id="@+id/btnPlay"
-                    android:layout_width="97dp"
-                    android:layout_height="91dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/btnBackward"
-                    android:visibility="visible"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="2dp"
                     android:layout_toEndOf="@+id/btnBackward"
                     android:layout_toRightOf="@+id/btnBackward"
-                    android:src="@drawable/play" />
+                    android:src="@drawable/play"
+                    android:visibility="visible" />
 
                 <ImageButton
                     android:id="@+id/btnPause"
-                    android:layout_width="83dp"
-                    android:layout_height="84dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/btnPlay"
                     android:visibility="gone"
-                    android:layout_marginStart="23dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="2dp"
                     android:layout_toEndOf="@+id/btnPlay"
                     android:layout_toRightOf="@+id/btnPlay"
                     android:src="@drawable/pause" />
 
                 <ImageButton
                     android:id="@+id/btnForward"
-                    android:layout_width="64dp"
-                    android:layout_height="75dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/btnPause"
-                    android:layout_marginStart="31dp"
-                    android:layout_marginLeft="31dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="2dp"
                     android:layout_toEndOf="@+id/btnPause"
                     android:layout_toRightOf="@+id/btnPause"
-                    android:contentDescription="@+id/imageButton3"
                     android:src="@drawable/forward" />
 
                 <TextView
@@ -108,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/seekBar"
-                    android:layout_marginTop="110dp"
+                    android:layout_marginTop="31dp"
                     android:text="0 min, 0 sec" />
 
                 <SeekBar
@@ -118,9 +122,9 @@
                     android:layout_above="@+id/btnBackward"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginBottom="-112dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="44dp"
                     tools:ignore="UnknownId" />
 
             </RelativeLayout>

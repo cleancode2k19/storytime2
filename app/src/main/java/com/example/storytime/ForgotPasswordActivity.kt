@@ -2,13 +2,16 @@ package com.example.storytime
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
+
 
 class ForgotPasswordActivity : AppCompatActivity() {
     lateinit var forgotEmail: EditText
@@ -17,15 +20,19 @@ class ForgotPasswordActivity : AppCompatActivity() {
     lateinit var btnforgotpass: Button
     lateinit var loginBack:TextView
     lateinit var signUpBack:TextView
+    val database = FirebaseDatabase.getInstance()
+    val myRef: DatabaseReference = database.getReference("reader")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.forgot_password)
         forgotEmail = findViewById(R.id.forgotEmail)
         forgotPassword = findViewById(R.id.forgotPassword)
         forgotPasswordReenter = findViewById(R.id.forgotPasswordReenter)
-        btnforgotpass = findViewById(R.id.btnLogin)
+        btnforgotpass = findViewById(R.id.btnforgotpass)
         signUpBack = findViewById(R.id.signUpBack)
         loginBack = findViewById(R.id.loginBack)
+
         btnforgotpass.setOnClickListener{
             setForgotData()
         }
@@ -43,8 +50,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         if(forgotEmail.isEmpty()){
             Toast.makeText(applicationContext,"Enter correct username/Email", Toast.LENGTH_LONG).show()
         }
-        val database = FirebaseDatabase.getInstance()
-        val myRef: DatabaseReference = database.getReference("reader")
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 forgotPassword.setVisibility(View.GONE)
@@ -53,14 +58,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     for(item in p0.children) {
                         val emailOk = item.child("email").getValue().toString().equals(forgotEmail)
                         if (emailOk) {
-                            forgotPassword.setVisibility(View.VISIBLE)
-                            val forgotPassword = forgotPassword.text.toString().trim()
+                           val forgotPassword = forgotPassword.text.toString().trim()
 
                             if (forgotPassword.isEmpty()) {
                                 Toast.makeText(applicationContext,"Enter correct password", Toast.LENGTH_LONG).show()
                             }
-                            forgotPasswordReenter.setVisibility(View.VISIBLE)
-                            val forgotPasswordReenter = forgotPasswordReenter.text.toString().trim()
+                           val forgotPasswordReenter = forgotPasswordReenter.text.toString().trim()
 
                             if (forgotPasswordReenter.isEmpty()) {
                                 Toast.makeText(applicationContext,"Enter correct password", Toast.LENGTH_LONG).show()
