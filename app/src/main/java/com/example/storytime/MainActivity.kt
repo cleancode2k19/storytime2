@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
     }
-    fun isEmailValid(email: String?): Boolean {
+    private fun isEmailValid(email: String?): Boolean {
         val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern: Pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(email)
@@ -52,26 +52,26 @@ class MainActivity : AppCompatActivity() {
         }
         val readerEmail = readerEmail.text.toString().trim()
         if(readerEmail.isEmpty()||isEmailValid(readerEmail)){
-           msg=="Enter correct Email"
+           msg="Enter correct Email"
             pflag=true
         }
         val readerPassword = readerPassword.text.toString().trim()
        if(readerPassword.isEmpty()){
 
-           msg=="Enter correct password"
+           msg="Enter correct password"
            pflag=true
         }
         val readerRepeatPassword = readerRepeatPassword.text.toString().trim()
         if(readerRepeatPassword.isEmpty()){
-            msg=="Enter repeat password"
+            msg="Enter repeat password"
             pflag=true
         }
         if(readerPassword!=readerRepeatPassword){
-            msg=="Please Enter your Repeat Password same as password"
+            msg="Please Enter your Repeat Password same as password"
             pflag=true
         }
-        if(accept.isChecked){
-            msg=="Please Accept the terms and condition"
+        if(!accept.isChecked){
+            msg="Please Accept the terms and condition"
             pflag=true
         }
         if(!pflag) {
