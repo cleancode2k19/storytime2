@@ -6,6 +6,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,35 +36,42 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
     }
+    fun isEmailValid(email: String?): Boolean {
+        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
+        val pattern: Pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = pattern.matcher(email)
+        return matcher.matches()
+    }
     private fun saveData(){
         val name = readerName.text.toString().trim()
         var pflag=false
+        var msg="Fix validation error"
         if(name.isEmpty()){
             Toast.makeText(applicationContext,"Enter correct Name", Toast.LENGTH_LONG).show()
             pflag=true
         }
         val readerEmail = readerEmail.text.toString().trim()
-        if(readerEmail.isEmpty()){
-            Toast.makeText(applicationContext,"Enter correct Email", Toast.LENGTH_LONG).show()
+        if(readerEmail.isEmpty()||isEmailValid(readerEmail)){
+           msg=="Enter correct Email"
             pflag=true
         }
         val readerPassword = readerPassword.text.toString().trim()
        if(readerPassword.isEmpty()){
-           Toast.makeText(applicationContext,"Enter correct password",Toast.LENGTH_LONG).show()
+
+           msg=="Enter correct password"
            pflag=true
         }
         val readerRepeatPassword = readerRepeatPassword.text.toString().trim()
         if(readerRepeatPassword.isEmpty()){
-            Toast.makeText(applicationContext,"Enter repeat password",Toast.LENGTH_LONG).show()
+            msg=="Enter repeat password"
             pflag=true
         }
         if(readerPassword!=readerRepeatPassword){
-
-            Toast.makeText(applicationContext,"Please Enter your Repeat Password same as password", Toast.LENGTH_LONG).show()
+            msg=="Please Enter your Repeat Password same as password"
             pflag=true
         }
         if(accept.isChecked){
-            accept.error = "Please Accept the terms and conditions"
+            msg=="Please Accept the terms and condition"
             pflag=true
         }
         if(!pflag) {
@@ -79,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(myIntent)
             }
         } else{
-            Toast.makeText(applicationContext,"Fix validation error", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext,msg, Toast.LENGTH_LONG).show()
         }
     }
 }
