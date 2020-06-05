@@ -36,11 +36,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
     }
-    private fun isEmailValid(email: String?): Boolean {
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern: Pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = pattern.matcher(email)
-        return matcher.matches()
+
+    private fun isEmailValid(email: String): Boolean {
+        return Pattern.compile(
+            "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
+                    + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                    + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                    + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
+                    + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+        ).matcher(email).matches()
     }
     private fun saveData(){
         val name = readerName.text.toString().trim()
@@ -51,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             pflag=true
         }
         val readerEmail = readerEmail.text.toString().trim()
-        if(readerEmail.isEmpty()||isEmailValid(readerEmail)){
+        if(readerEmail.isEmpty() && isEmailValid(readerEmail)){
            msg="Enter correct Email"
             pflag=true
         }
