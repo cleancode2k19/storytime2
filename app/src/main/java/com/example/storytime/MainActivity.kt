@@ -16,27 +16,31 @@ class MainActivity : AppCompatActivity() {
     lateinit var readerPassword: EditText
     lateinit var readerRepeatPassword: EditText
     lateinit var btnSignup: Button
-    lateinit var btnSignin: TextView
+    lateinit var Signin: TextView
     lateinit var accept: CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //here I am tagging the layout to the activity
         setContentView(R.layout.activity_main)
+
         readerName = findViewById(R.id.readerName)
         readerEmail = findViewById(R.id.readerEmail)
         readerPassword = findViewById(R.id.readerPassword)
         readerRepeatPassword = findViewById(R.id.readerRepeatPassword)
         accept = findViewById(R.id.accept)
         btnSignup = findViewById(R.id.btnSignup)
+        //on click of sign up button saving captured information
         btnSignup.setOnClickListener{
             saveData()
         }
-        btnSignin = findViewById(R.id.btnSignin)
-        btnSignin.setOnClickListener{
+        //on click of sign in redirecting to the login page
+        Signin = findViewById(R.id.btnSignin)
+        Signin.setOnClickListener{
             val myIntent = Intent(baseContext, LoginActivity::class.java)
             startActivity(myIntent)
         }
     }
-
+//Email Validation check code
     private fun isEmailValid(email: String): Boolean {
         return Pattern.compile(
             "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
@@ -47,7 +51,9 @@ class MainActivity : AppCompatActivity() {
                     + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
     }
+
     private fun saveData(){
+        //validation of form field captured data
         val name = readerName.text.toString().trim()
         var pflag=false
         var msg="Fix validation error"
@@ -80,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             pflag=true
         }
         if(!pflag) {
+            //database insertion of data
             val database = FirebaseDatabase.getInstance()
 
             val myRef: DatabaseReference = database.getReference("reader")

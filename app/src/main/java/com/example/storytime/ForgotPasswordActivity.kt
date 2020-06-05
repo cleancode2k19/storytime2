@@ -25,6 +25,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //adding layout to the activity
         setContentView(R.layout.forgot_password)
         forgotEmail = findViewById(R.id.forgotEmail)
         forgotPassword = findViewById(R.id.forgotPassword)
@@ -32,14 +33,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
         btnforgotpass = findViewById(R.id.btnforgotpass)
         signUpBack = findViewById(R.id.signUpBack)
         loginBack = findViewById(R.id.loginBack)
-
+        //forgot password on click event
         btnforgotpass.setOnClickListener{
             setForgotData()
         }
+        //sign up  on click event
         signUpBack.setOnClickListener{
             val myIntent = Intent(baseContext, MainActivity::class.java)
             startActivity(myIntent)
         }
+        //sign in on click event
         loginBack.setOnClickListener{
             val myIntent = Intent(baseContext, LoginActivity::class.java)
             startActivity(myIntent)
@@ -56,6 +59,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 if(p0!!.exists()){
                     //P0!! to address null value
                     for(item in p0.children) {
+                        //logic to check captured email/username is valid or not in database
                         val emailOk = item.child("email").getValue().toString().equals(forgotEmail)
                         if (emailOk) {
                            val forgotPassword = forgotPassword.text.toString().trim()

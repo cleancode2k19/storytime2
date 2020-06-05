@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+//adapter class to show story titles in list view
 
 class DashboardAdapter (val mCtx : Context, val layoutResId:Int,val storyList:List<StoryBacklog>) : ArrayAdapter<StoryBacklog>(mCtx, layoutResId, storyList) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

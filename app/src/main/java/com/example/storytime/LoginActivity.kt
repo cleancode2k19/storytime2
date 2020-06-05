@@ -20,8 +20,10 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //here I am tagging the layout to the activity
         setContentView(R.layout.signin)
         fgpwd = findViewById(R.id.fgpwd)
+        //onclick of forgot password text redirection
         fgpwd.setOnClickListener{
             val myIntent = Intent(baseContext, ForgotPasswordActivity::class.java)
             startActivity(myIntent)
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         readerEmail = findViewById(R.id.loginEmail)
         readerPassword = findViewById(R.id.loginPassword)
         btnLogin = findViewById(R.id.btnLogin)
+        //onclick of login listener
         btnLogin.setOnClickListener{
             getLoginData()
         }
@@ -56,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     //P0!! to address null value
                     var flag = false
                     for(item in p0.children) {
+                        //authentication check start
                         val emailOk = item.child("email").getValue().toString().equals(readerEmail)
                         val pwdOk = item.child("password").getValue().toString().equals(readerPassword)
                         if (emailOk && pwdOk) {
@@ -90,7 +94,6 @@ class LoginActivity : AppCompatActivity() {
 
 
         })
-
 
     } else {
             Toast.makeText(

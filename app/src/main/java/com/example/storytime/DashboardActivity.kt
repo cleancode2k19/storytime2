@@ -41,13 +41,16 @@ class DashboardActivity() : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //here I am tagging the layout to the activity
         setContentView(R.layout.dashboard_story)
+        //Carry the login user name
         val prefs =
             getSharedPreferences("MyApp", Context.MODE_PRIVATE)
         var username = prefs.getString("username", "UNKNOWN")
         rName = findViewById(R.id.rName)
         rName.text = username
         logOut = findViewById(R.id.logout)
+        //onclick of logout, signing out of the app
         logOut.setOnClickListener {
             Toast.makeText(
                 applicationContext,
@@ -74,6 +77,7 @@ class DashboardActivity() : AppCompatActivity() {
                         val story = item.getValue(StoryBacklog::class.java) //.getvalue method only takes java class
                         storyList.add(story!!)
                     }
+                   //list view adapter to generate dynamic rows, with story title
                     val adapter = DashboardAdapter(applicationContext,R.layout.stories,storyList)
                     listView.adapter = adapter
                 }
@@ -101,6 +105,7 @@ class DashboardActivity() : AppCompatActivity() {
         seekBar = findViewById(R.id.seekBar)
         seekBar.isClickable = false
         pauseBtn.isEnabled = true
+        //play button click functionality
         playBtn.setOnClickListener {
             pauseBtn.setVisibility(View.VISIBLE)
             playBtn.setVisibility(View.GONE)
@@ -127,6 +132,7 @@ class DashboardActivity() : AppCompatActivity() {
             pauseBtn.isEnabled = true
             playBtn.isEnabled = false
         }
+        //pause button click functionality
         btnPause.setOnClickListener {
             pauseBtn.setVisibility(View.GONE)
             playBtn.setVisibility(View.VISIBLE)
@@ -135,6 +141,7 @@ class DashboardActivity() : AppCompatActivity() {
             playBtn.isEnabled = true
             Toast.makeText(applicationContext, "Audio Paused", Toast.LENGTH_SHORT).show()
         }
+        //Forward button click functionality
         btnForward.setOnClickListener {
             if ((playTime + forwardTime) <= endTime) {
                 playTime += forwardTime
@@ -151,6 +158,7 @@ class DashboardActivity() : AppCompatActivity() {
                 playBtn.isEnabled = true
             }
         }
+        //backward button click functionality
         btnBackward.setOnClickListener {
             if ((playTime - backwardTime) > 0) {
                 playTime -= backwardTime
@@ -168,6 +176,7 @@ class DashboardActivity() : AppCompatActivity() {
             }
         }
     }
+    //story time update
     private val updateSongTime = object : Runnable {
         override fun run() {
             playTime = mediaPlayer.currentPosition
