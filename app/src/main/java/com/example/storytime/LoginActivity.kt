@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                             val prefs =
                                 getSharedPreferences("MyApp", Context.MODE_PRIVATE)
                             prefs.edit().putString("username", item.child("name").getValue().toString()).commit()
-                            val myIntent = Intent(baseContext, DashboardActivity::class.java)
+                                val myIntent = Intent(baseContext, DashboardActivity::class.java)
                             startActivity(myIntent)
                             return
                         }
